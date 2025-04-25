@@ -1,0 +1,137 @@
+//
+//  ContentView.swift
+//  GuessTheFlag
+//
+//  Created by @binoooh on 4/24/25.
+//
+
+import SwiftUI
+
+struct ContentView: View {
+    // countries array contains the name of the images on the Assets folder
+    // we randomnize the array using shuffled() method
+    @State private var countries = ["Estonia", "France", "Germany", "Ireland", "Italy", "Nigeria", "Poland", "Spain", "UK", "Ukraine", "US"].shuffled()
+    
+    // correctAnswer automatically picks a random number
+    @State private var correctAnswer = Int.random(in: 0...2)
+    
+    // scoreTitle stores the title that will be shown inside the alert
+    @State private var scoreTitle = ""
+    
+    // showingScore store whether the alert is showing or not
+    @State private var showingScore = false
+    
+    // showFinalScore is true if gamesPlayed = 8
+    @State private var showFinalScore = false
+    
+    // playerScore store the user's score
+    @State private var playerScore = 0
+    
+    // gamesPlaed store the number of games played
+    @State private var gamesPlayed = 0
+    
+    var body: some View {
+        ZStack {
+            LinearGradient(colors: [.blue, .red], startPoint: .top, endPoint: .bottom)
+                .ignoresSafeArea()
+            VStack {
+                Spacer()
+                Text("Guess The Flag")
+                    .font(.largeTitle.weight(.bold))
+                    .foregroundStyle(.white)
+                VStack(spacing: 15) {
+                    VStack {
+                        Text("Tap the flag of")
+                            .foregroundStyle(.secondary)
+                            .font(.subheadline.weight(.heavy))
+                        
+                        Text(countries[correctAnswer])
+                            .font(.largeTitle.weight(.semibold))
+                    }
+                    // Create a loop to show 3 flags
+                    ForEach(0..<3) { number in
+                        Button {
+                            flagTapped(number)
+                        } label: {
+                            Image(countries[number])
+                                .clipShape(.capsule)
+                                .shadow(radius: 5)
+                        }
+                    }
+                }
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 20)
+                .background(.regularMaterial)
+                .clipShape(.rect(cornerRadius: 20))
+                
+                Spacer()
+                Spacer()
+                
+                Text("Score: \(playerScore)")
+                    .foregroundStyle(.white)
+                    .font(.title.bold())
+                
+                Spacer()
+            }
+            .padding()
+            
+        }
+        
+        // Show the alert and ask another question
+        .alert(scoreTitle, isPresented: $showingScore) {
+            Button("Continue", action: askQuestion)
+        } message: {
+            Text("Your score is \(playerScore)")
+        }
+        
+        // Show final score and reset the game
+        .alert(scoreTitle, isPresented: $showFinalScore) {
+            Button("Restart the Game", action: resetGame)
+        } message: {
+            Text("Your final score is \(playerScore)")
+        }
+        
+    }
+    
+    // Method to show the alert whether the answer is correct or wrong
+    func flagTapped(_ number: Int) {
+        
+        // Increment gamesPlayed by 1
+        gamesPlayed += 1
+        
+        if number == correctAnswer {
+            scoreTitle = "Correct!"
+            playerScore += 1
+        } else {
+            scoreTitle = "Wrong! That's the flag of \(countries[number])"
+        }
+        
+        if gamesPlayed < 8 {
+            showingScore = true
+        } else {
+            scoreTitle = "Game Over!"
+            showFinalScore = true
+        }
+        
+    }
+    
+    // method to reset the game
+    func resetGame() {
+        gamesPlayed = 0
+        playerScore = 0
+        showingScore = false
+        showFinalScore = false
+        askQuestion()
+    }
+    
+    func askQuestion() {
+        // We reset the game by reshuffling the countries array
+        // and pick random numbers from 0 - 2 assign it to correctAnswer
+        countries.shuffle()
+        correctAnswer = Int.random(in: 0...2)
+    }
+}
+
+#Preview {
+    ContentView()
+}
