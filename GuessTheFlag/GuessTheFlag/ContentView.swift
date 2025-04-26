@@ -7,6 +7,18 @@
 
 import SwiftUI
 
+// Project 3 - Challenge 2
+struct FlagImage: View {
+    var imageName: String
+    var body: some View {
+        Image(imageName)
+            .renderingMode(.original)
+            .clipShape(Capsule())
+            .overlay(Capsule().stroke(style: StrokeStyle(lineWidth: 3)))
+            .shadow(radius: 5)
+    }
+}
+
 struct ContentView: View {
     // countries array contains the name of the images on the Assets folder
     // we randomnize the array using shuffled() method
@@ -53,9 +65,8 @@ struct ContentView: View {
                         Button {
                             flagTapped(number)
                         } label: {
-                            Image(countries[number])
-                                .clipShape(.capsule)
-                                .shadow(radius: 5)
+                            // Project 3 - Challenge 2
+                            FlagImage(imageName: countries[number])
                         }
                     }
                 }
