@@ -10,6 +10,8 @@ import SwiftUI
 // Project 3 - Challenge 2
 struct FlagImage: View {
     var imageName: String
+    var width: CGFloat
+    
     var body: some View {
         Image(imageName)
             .renderingMode(.original)
