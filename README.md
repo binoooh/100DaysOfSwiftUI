@@ -5,7 +5,7 @@
 The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 25 and will continue updating this repo as I go along finishing the course.
 
 #### :spiral_notepad: Coding Projects
-- [x] Project 1 - WeSplit
+- [x] Project 1 - [WeSplit](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/WeSplit)
 - [x] Project 2 - Guess The Flag
 - [x] Project 3 - Views and Modifiers
 - [x] Project 4 - Rock, Paper Scissors
