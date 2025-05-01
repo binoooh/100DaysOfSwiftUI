@@ -26,43 +26,82 @@ struct ContentView: View {
     @State private var showingAlert = false
     
     var body: some View {
+        
         NavigationStack {
+            
+            HStack { // Day 28 Challenge
+                Text("BetterRest")
+                    .font(.largeTitle)
+                    .fontWeight(.bold)
+                Spacer()
+                Image(systemName: "moon.circle.fill")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 40, height: 40)
+                    .clipShape(Circle())
+            }
+            .padding(.all, 30)
+            
             Form {
-                VStack(alignment: .leading, spacing: 0) {
+                
+                Section { // Day 28 Challenge
+                    HStack {
+                        Image(systemName: "clock").foregroundStyle(.blue)
+                        DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
+                            .labelsHidden()
+                    }
+                } header: {
                     Text("When do you want to wake up?")
-                        .font(.headline)
-                    
-                    DatePicker("Please enter a time", selection: $wakeUp, displayedComponents: .hourAndMinute)
-                        .labelsHidden()
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.blue)
+                        .textCase(nil)
                 }
-                VStack(alignment: .leading, spacing: 0) {
+                Section { // Day 28 Challenge
+                    HStack {
+                        Image(systemName: "bed.double.fill").foregroundStyle(.blue)
+                        Stepper("\(sleepAmount.formatted())", value: $sleepAmount, in: 4...12, step: 0.25)
+                    }
+                } header: {
                     Text("Desired amount of sleep")
-                        .font(.headline)
-                    
-                    Stepper("\(sleepAmount.formatted())", value: $sleepAmount, in: 4...12, step: 0.25)
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.blue)
+                        .textCase(nil)
                 }
                 
-                VStack(alignment: .leading, spacing: 0) {
+                Section { // Day 28 Challenge
+                    HStack {
+                        Image(systemName: "cup.and.saucer").foregroundStyle(.blue)
+                        Picker("^[\(coffeeAmount) cup](inflect: true)", selection: $coffeeAmount) {
+                            ForEach(0...20, id: \.self) {
+                                Text("^[\($0) cup](inflect: true)")
+                            }
+                        }
+                    }
+                } header: {
                     Text("Daily coffee intake")
-                        .font(.headline)
-                    
-                    Stepper("^[\(coffeeAmount) cup](inflect: true)", value: $coffeeAmount, in: 1...20)
+                        .font(.subheadline.bold())
+                        .foregroundStyle(.blue)
+                        .textCase(nil)
                 }
                 
-            }
-            .navigationTitle("BetterRest")
-            .toolbar {
-                Button("Calculate", action: calculateBedTime)
-            }
-            .alert(alertTitle, isPresented: $showingAlert) {
-                Button("OK") { }
-            } message: {
-                Text(alertMessage)
+                Section { // Day 28 Challenge
+                    VStack {
+                        Text("Recommended Bedtime")
+                            .foregroundStyle(.blue)
+                        Text(calculateBedTime())
+                            .font(.title2.bold())
+                            .padding(5)
+                    }
+                    .padding(15)
+                }
+                .frame(maxWidth: .infinity)
+                
             }
         }
+        
     }
     
-    func calculateBedTime() {
+    func calculateBedTime() -> String {
         do {
             let config = MLModelConfiguration() // reads our SleepCalculator ML data
             let model = try SleepCalculator(configuration: config)
@@ -75,14 +114,11 @@ struct ContentView: View {
             
             let sleepTime = wakeUp - prediction.actualSleep
             
-            alertTitle = "Your ideal bedtime is…"
-            alertMessage = sleepTime.formatted(date: .omitted, time: .shortened)
-            showingAlert = true
-
+            return sleepTime.formatted(date: .omitted, time: .shortened)
+            
         } catch {
-            alertTitle = "Error"
-            alertMessage = "Sorry, there was a problem calculating your bedtime."
-            showingAlert = true
+            return "Error"
+            
         }
     }
 }
