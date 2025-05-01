@@ -6,15 +6,16 @@ The projects and challenges from this great course helps me through my journey i
 
 #### :spiral_notepad: Coding Projects
 - [x] Project 1 - [WeSplit](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/WeSplit)
-- [x] Project 2 - Guess The Flag
-- [x] Project 3 - Views and Modifiers
-- [x] Project 4 - Rock, Paper Scissors
-- [x] Project 5 - BetterRest
-- [ ] Project 6 - WordScramble  - In-Progress :bricks:
-- [ ] Project 7 - Animations
-- [ ] Project 8 - iExpense
-- [ ] Project 9 - Moonshot
-- [ ] Project 10 - Drawing
+- [x] Project 2 - [Unit Coverter](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/UnitConverter)
+- [x] Project 3 - [Guess The Flag](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/GuessTheFlag)
+- [x] Project 4 - [Views and Modifiers](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/ViewsAndModifiers)
+- [x] Project 5 - [Rock, Paper Scissors](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/RockPaperScissors)
+- [x] Project 6 - [BetterRest](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/BetterRest)
+- [ ] Project 7 - WordScramble  - In-Progress :bricks:
+- [ ] Project 8 - Animations
+- [ ] Project 9 - iExpense
+- [ ] Project 10 - Moonshot
+- [ ] Project 11 - Drawing
 
 ## Tech Stack
 | Category    | Technologies                     |
