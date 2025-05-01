@@ -9,8 +9,8 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 2 - Guess The Flag
 - [x] Project 3 - Views and Modifiers
 - [x] Project 4 - Rock, Paper Scissors
-- [ ] Project 5 - BetterRest - In-Progress :bricks:
-- [ ] Project 6 - WordScramble
+- [x] Project 5 - BetterRest
+- [ ] Project 6 - WordScramble  - In-Progress :bricks:
 - [ ] Project 7 - Animations
 - [ ] Project 8 - iExpense
 - [ ] Project 9 - Moonshot
