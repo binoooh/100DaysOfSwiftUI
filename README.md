@@ -11,8 +11,8 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 4 - [Views and Modifiers](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/ViewsAndModifiers)
 - [x] Project 5 - [Rock, Paper Scissors](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/RockPaperScissors)
 - [x] Project 6 - [BetterRest](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/BetterRest)
-- [ ] Project 7 - WordScramble  - In-Progress :bricks:
-- [ ] Project 8 - Animations
+- [x] Project 7 - WordScramble  
+- [ ] Project 8 - Animations - In-Progress :bricks:
 - [ ] Project 9 - iExpense
 - [ ] Project 10 - Moonshot
 - [ ] Project 11 - Drawing
