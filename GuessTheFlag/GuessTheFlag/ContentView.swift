@@ -10,7 +10,7 @@ import SwiftUI
 // Project 3 - Challenge 2
 struct FlagImage: View {
     var imageName: String
-    var width: CGFloat
+    //var width: CGFloat
     
     var body: some View {
         Image(imageName)
@@ -44,6 +44,12 @@ struct ContentView: View {
     // gamesPlaed store the number of games played
     @State private var gamesPlayed = 0
     
+    // Day 34 - Challenge
+    @State private var rotationAmount = 0
+    @State private var opacityAmount = 1.0
+    @State private var animationAmount = 1.0
+    @State private var selectedFlag = ""
+    
     var body: some View {
         ZStack {
             LinearGradient(colors: [.blue, .red], startPoint: .top, endPoint: .bottom)
@@ -65,10 +71,21 @@ struct ContentView: View {
                     // Create a loop to show 3 flags
                     ForEach(0..<3) { number in
                         Button {
+                            selectedFlag = countries[number]
                             flagTapped(number)
+                            // Day 34 - Challenge
+                            withAnimation(.spring(response: 0.4, dampingFraction: 0.6)) {
+                                rotationAmount += 360
+                                opacityAmount -= 0.75
+                                animationAmount = 0
+                            }
                         } label: {
                             // Project 3 - Challenge 2
                             FlagImage(imageName: countries[number])
+                                // Day 34 - Challenge
+                                .rotation3DEffect(.degrees(Double(selectedFlag == countries[number] ? rotationAmount : 0)), axis: (x: 0, y: 1, z: 0))
+                                .opacity(selectedFlag == countries[number] ? 1.0 : opacityAmount)
+                                //.scaleEffect(selectedFlag == countries[number] ? 1.0 : animationAmount)
                         }
                     }
                 }
@@ -120,10 +137,16 @@ struct ContentView: View {
         }
         
         if gamesPlayed < 8 {
-            showingScore = true
+            // add delay before showing the alert
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                showingScore = true
+            }
         } else {
             scoreTitle = "Game Over!"
-            showFinalScore = true
+            // add delay before showing the alert
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.4) {
+                showFinalScore = true
+            }
         }
         
     }
@@ -142,6 +165,10 @@ struct ContentView: View {
         // and pick random numbers from 0 - 2 assign it to correctAnswer
         countries.shuffle()
         correctAnswer = Int.random(in: 0...2)
+        // Day 34 - Challenge
+        opacityAmount = 1.0
+        animationAmount = 1.0
+        rotationAmount = 0
     }
 }
 
