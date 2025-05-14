@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-
 struct ContentView: View {
     
     @State private var expenses = Expenses()
@@ -15,21 +14,14 @@ struct ContentView: View {
     
     var body: some View {
         NavigationStack {
-            List {
-                ForEach(expenses.items) { item in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(item.name)
-                                .font(.headline)
-                            Text(item.type)
-                        }
-                        Spacer()
-                        Text(item.amount, format: .currency(code: "USD"))
-                    }
-                }
-                .onDelete(perform: removeItems)
+            VStack {
+                //  Day 38 Code Challenge
+                PersonalView(expenses: expenses)
+                BusinessView(expenses: expenses)
+                Spacer() // Pushes the lists to the top if there's extra space
             }
             .navigationTitle("iExpense")
+            .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
                 Button("Add new item", systemImage: "plus") {
                     isShowingAddNew = true
@@ -39,10 +31,6 @@ struct ContentView: View {
                 AddView(expenses: expenses)
             }
         }
-    }
-    
-    func removeItems(at offsets: IndexSet) {
-        expenses.items.remove(atOffsets: offsets)
     }
 }
 
