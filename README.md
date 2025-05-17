@@ -15,8 +15,8 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 8 - [Animations](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Animations)
 - [x] Project 9 - [Edutainment](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Edutainment)
 - [x] Project 10 - [iExpense](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/iExpense)
-- [ ] Project 11 - Moonshot - In-Progress :bricks:
-- [ ] Project 12 - Drawing
+- [x] Project 11 - [Moonshot](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Moonshot)
+- [ ] Project 12 - Drawing  - In-Progress :bricks:
 
 ## Tech Stack
 | Category    | Technologies                     |
