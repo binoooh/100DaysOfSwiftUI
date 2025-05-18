@@ -26,38 +26,9 @@ struct MissionView: View {
         // Create a horizontal scrolling view
         ScrollView {
             VStack { // Main VStack
-                Image(mission.image) // Show the mission logo
-                    .resizable()
-                    .scaledToFit()
-                    // Set the image to 50-60% width off the frame
-                    .containerRelativeFrame(.horizontal) { width, axis in
-                        width * 0.6
-                    }
-                    .padding(.top)
                 
-                VStack(alignment: .leading) { // View placeholder for the mission description
-                    
-                    Rectangle()
-                        .frame(height: 2)
-                        .foregroundStyle(.lightMode)
-                        .padding(.vertical)
-                    
-                    Text("Mission Highlights")
-                        .font(.title.bold())
-                        .padding(.bottom, 5)
-                    
-                    Text(mission.description)
-                    
-                    Rectangle()
-                        .frame(height: 2)
-                        .foregroundStyle(.lightMode)
-                        .padding(.vertical)
-                    
-                    Text("Crew")
-                        .font(.title.bold())
-                        .padding(.bottom, 5)
-                }
-                .padding(.horizontal)
+                // Day 43 Coding Challenge
+                MissionDetailsView(mission: mission)
                 
                 // Create a horizontal scroll view to display crew members
                 ScrollView(.horizontal, showsIndicators: false) {
