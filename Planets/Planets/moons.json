@@ -1,0 +1,68 @@
+{
+    "moon": {
+        "id": "moon",
+        "name": "Moon",
+        "description": "Earth's only natural satellite, the Moon affects tides and has been the only celestial body visited by humans.",
+        "image": "moon"
+    },
+    "phobos": {
+        "id": "phobos",
+        "name": "Phobos",
+        "description": "Phobos is the larger and closer of Mars' two moons, with a decaying orbit.",
+        "image": "phobos"
+    },
+    "deimos": {
+        "id": "deimos",
+        "name": "Deimos",
+        "description": "Deimos is the smaller of Mars’ two moons and has a smooth surface due to regolith.",
+        "image": "deimos"
+    },
+    "io": {
+        "id": "io",
+        "name": "Io",
+        "description": "One of Jupiter's moons, Io is the most volcanically active body in the Solar System.",
+        "image": "io"
+    },
+    "europa": {
+        "id": "europa",
+        "name": "Europa",
+        "description": "Europa is an icy moon of Jupiter that may harbor a subsurface ocean.",
+        "image": "europa"
+    },
+    "genymede": {
+        "id": "genymede",
+        "name": "Ganymede",
+        "description": "Ganymede is the largest moon in the Solar System and has a magnetic field.",
+        "image": "genymede"
+    },
+    "callisto": {
+        "id": "callisto",
+        "name": "Callisto",
+        "description": "Callisto is heavily cratered and is the third-largest moon in the Solar System.",
+        "image": "callisto"
+    },
+    "titan": {
+        "id": "titan",
+        "name": "Titan",
+        "description": "Titan is Saturn’s largest moon and has a thick atmosphere with lakes of methane.",
+        "image": "titan"
+    },
+    "enceladus": {
+        "id": "enceladus",
+        "name": "Enceladus",
+        "description": "Enceladus is a small, icy moon of Saturn with water-ice geysers.",
+        "image": "enceladus"
+    },
+    "miranda": {
+        "id": "miranda",
+        "name": "Miranda",
+        "description": "Miranda is one of Uranus' moons known for its extreme and varied terrain.",
+        "image": "miranda"
+    },
+    "triton": {
+        "id": "triton",
+        "name": "Triton",
+        "description": "Triton is Neptune’s largest moon and orbits in the opposite direction of the planet’s rotation.",
+        "image": "triton"
+    }
+}
