@@ -2,7 +2,7 @@
 
 ### My solutions and project challenges from Paul Hudson's [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui)
 
-The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 39 and will continue updating this repo as I go along finishing the course.
+The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 47 and will continue updating this repo as I go along finishing the course.
 
 #### :spiral_notepad: Coding Projects
 - [x] Project 1 - [WeSplit](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/WeSplit)
@@ -16,10 +16,11 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 9 - [Edutainment](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Edutainment)
 - [x] Project 10 - [iExpense](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/iExpense)
 - [x] Project 11 - [Moonshot](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Moonshot)
-- [ ] Project 12 - Drawing  - In-Progress :bricks:
+- [ ] Project 12 - Habit Tracker - In-Progress 🧱
+- [ ] Project 13 - Drawing
 
 ## Tech Stack
 | Category    | Technologies                     |
 |-------------|----------------------------------|
 | Languages   | Swift, SwiftUI                   |
-| Tools       | Xcode, Fork                      |
+| Tools       | Xcode, Fork, AlexSideBar         |
