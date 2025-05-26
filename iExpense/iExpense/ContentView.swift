@@ -23,12 +23,12 @@ struct ContentView: View {
             .navigationTitle("iExpense")
             .navigationBarTitleDisplayMode(.automatic)
             .toolbar {
-                Button("Add new item", systemImage: "plus") {
-                    isShowingAddNew = true
+                // Day 46 Coding Challenge
+                NavigationLink {
+                    AddView(expenses: expenses)
+                } label: {
+                    Image(systemName: "plus")
                 }
-            }
-            .sheet(isPresented: $isShowingAddNew) {
-                AddView(expenses: expenses)
             }
         }
     }
