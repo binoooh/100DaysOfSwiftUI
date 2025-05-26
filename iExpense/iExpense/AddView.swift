@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AddView: View {
     @Environment(\.dismiss) var dismiss
-    @State private var name = ""
+    @State private var name = "Add New Item"
     @State private var type = "Personal"
     @State private var amount: Double = 0.0
     @State private var currency = "USD"
@@ -20,9 +20,10 @@ struct AddView: View {
     var body: some View {
         NavigationStack {
             Form {
-                Section(header: Text("Name")) {
-                    TextField("Name", text: $name)
-                }
+                // Day 46 Coding Challenge
+                //Section(header: Text("Name")) {
+                //    TextField("Name", text: $name)
+                //}
                 
                 Section(header: Text("Type")) {
                     Picker("Type", selection: $type) {
@@ -45,15 +46,28 @@ struct AddView: View {
                     }
                 }
             }
-            .navigationTitle("Add New Item")
+            // Day 46 Coding Challenge
+            .navigationTitle($name)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                Button("Save") {
-                    // Day 38 Coding Challenge
-                    let item = ExpenseItem(name: name, type: type, amount: amount, currency: currency)
-                    expenses.items.append(item)
-                    dismiss()
+                // Day 46 Coding Challenge
+                ToolbarItem(placement: .topBarLeading) {
+                    Button("Cancel") {
+                        dismiss()
+                    }
+                }
+                // Day 46 Coding Challenge
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button("Save") {
+                        // Day 38 Coding Challenge
+                        let item = ExpenseItem(name: name, type: type, amount: amount, currency: currency)
+                        expenses.items.append(item)
+                        dismiss()
+                    }
                 }
             }
+            // Day 46 Coding Challenge
+            .navigationBarBackButtonHidden()
         }
     }
 }
