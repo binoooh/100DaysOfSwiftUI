@@ -38,6 +38,7 @@ struct ContentView: View {
             .navigationTitle("Good Morning, \(name)")
             .padding(.vertical)
         }
+        .preferredColorScheme(.light)
     }
 }
 

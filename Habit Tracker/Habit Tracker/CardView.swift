@@ -79,7 +79,7 @@ struct CardView: View {
                     wiggleAnimation()
                     
                     withAnimation(.bouncy) {
-                        offset.height = UIScreen.main.bounds.height / value.translation.height - 30
+                        offset.height = UIScreen.main.bounds.height / value.translation.height - 50
                     }
                 }
                 .onEnded { value in
