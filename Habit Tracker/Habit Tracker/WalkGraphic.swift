@@ -9,7 +9,10 @@ import SwiftUI
 
 struct WalkGraphic: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Image(.walk)
+            .resizable()
+            .scaledToFit()
+            .frame(width: 300, height: 300)
     }
 }
 

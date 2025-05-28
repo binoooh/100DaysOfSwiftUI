@@ -8,14 +8,36 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State private var name: String = "Teri"
+    
+    // Adjust this value to control the overlap
+    let overlapAmount: CGFloat = 150
+    let cardData: [CardInfo] = [
+        CardInfo(title: "Sleep for 8 hours", tag: "sleep", detail: "Everyday", backgroundColor: Color(hex: 0xd8fe74), customGraphic: AnyView(SleepGraphic())),
+        CardInfo(title: "Go for a walk", tag: "walk", detail: "25 min", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(WalkGraphic())),
+        CardInfo(title: "Meditation", tag: "meditate", detail: "15 min", backgroundColor: Color(hex: 0x94abfe), customGraphic: AnyView(MeditationGraphic()))
+    ]
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            VStack {
+                CalendarView()
+                VStack { // Use ScrollView if cards might exceed screen height
+                    ZStack(alignment: .top){
+                        ForEach(Array(cardData.enumerated()), id: \.element.id) { index, cardInfo in
+                            CardView(info: cardInfo)
+                                .offset(y: CGFloat(index) * overlapAmount)
+                                .zIndex(Double(cardData.count))
+                        }
+                    }
+                    .padding(.top, 20) // Add some padding at the top and bottom of the scroll view
+                }
+                Spacer()
+            }
+            .navigationTitle("Good Morning, \(name)")
+            .padding(.vertical)
         }
-        .padding()
     }
 }
 

@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+// Model for CalendarDay
+struct CalendarDay: Identifiable, Hashable {
+    let id = UUID()
+    let dayNumber: Int
+    let dayOfWeek: String
+    var isSelected: Bool = false // To track selection
+    var isFutureDay: Bool = false
+}
