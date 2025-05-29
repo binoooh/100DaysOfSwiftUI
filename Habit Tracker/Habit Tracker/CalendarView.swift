@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct CalendarView: View {
-    @State private var days: [CalendarDay] = []
+    @State private var days: [CalendarModel] = []
     @State private var selectedDayID: UUID?
     @State private var displayedDate: Date = Date()
 
@@ -138,14 +138,14 @@ struct CalendarView: View {
         }
     }
 
-    private func generateDaysInMonth(for date: Date, today: Date, calendar: Calendar, dateFormatter: DateFormatter) -> [CalendarDay] {
+    private func generateDaysInMonth(for date: Date, today: Date, calendar: Calendar, dateFormatter: DateFormatter) -> [CalendarModel] {
         guard let monthInterval = calendar.dateInterval(of: .month, for: date),
               let numberOfDaysInMonth = calendar.range(of: .day, in: .month, for: date)?.count
         else {
             return []
         }
 
-        var calendarDays: [CalendarDay] = []
+        var calendarDays: [CalendarModel] = []
         dateFormatter.dateFormat = "EEE"
 
         let startOfToday = calendar.startOfDay(for: today) // Use the passed 'today'
@@ -164,7 +164,7 @@ struct CalendarView: View {
             // A day is selected if it's today AND it's not in the future (this check is a bit redundant if isFuture is false, but good for clarity)
             let isSelectedDay = calendar.isDate(startOfDayInMonth, inSameDayAs: startOfToday) && !isFuture
             
-            calendarDays.append(CalendarDay(dayNumber: dayNumber, dayOfWeek: dayOfWeek, isSelected: isSelectedDay, isFutureDay: isFuture))
+            calendarDays.append(CalendarModel(dayNumber: dayNumber, dayOfWeek: dayOfWeek, isSelected: isSelectedDay, isFutureDay: isFuture))
         }
         return calendarDays
     }

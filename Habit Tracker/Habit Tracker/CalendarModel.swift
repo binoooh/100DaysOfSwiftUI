@@ -8,7 +8,7 @@
 import Foundation
 
 // Model for CalendarDay
-struct CalendarDay: Identifiable, Hashable {
+struct CalendarModel: Identifiable, Hashable {
     let id = UUID()
     let dayNumber: Int
     let dayOfWeek: String

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct MeditationGraphic: View {
+struct MeditateGraphic: View {
     var body: some View {
         Image(.meditate)
             .resizable()
@@ -17,5 +17,5 @@ struct MeditationGraphic: View {
 }
 
 #Preview {
-    MeditationGraphic()
+    MeditateGraphic()
 }

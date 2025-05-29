@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CardView: View {
     
-    let info: CardInfo
+    let info: CardModel
     let cardCornerRadius: CGFloat = 20 // Define corner radius
     let cardBottomWidthRatio: CGFloat = 0.90 // Example: Bottom is 95% of top width
     
@@ -88,7 +88,7 @@ struct CardView: View {
                 }
         )
         .fullScreenCover(isPresented: $isCardPicked) {
-            HabitTrackerView(tag: info.tag)
+            HabitTrackerView(tag: info.tag, title: info.title)
         }
     }
     
@@ -132,5 +132,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(info: CardInfo(title: "Sleep for 8 hours", tag: "sleep", detail: "Everyday", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(SleepGraphic())))
+    CardView(info: CardModel(title: "Sleep for 8 hours", tag: "sleep", detail: "Everyday", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(SleepGraphic())))
 }

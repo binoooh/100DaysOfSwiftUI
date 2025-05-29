@@ -21,7 +21,7 @@ extension Color {
 
 struct DayView: View {
     
-    let day: CalendarDay
+    let day: CalendarModel
     
     var body: some View {
         VStack(spacing: 4) {
@@ -59,9 +59,9 @@ struct DayView: View {
 
 #Preview {
     VStack {
-            DayView(day: CalendarDay(dayNumber: 21, dayOfWeek: "Mon", isSelected: false))
-            DayView(day: CalendarDay(dayNumber: 22, dayOfWeek: "Tue", isSelected: true))
-            DayView(day: CalendarDay(dayNumber: 23, dayOfWeek: "Wed", isSelected: false, isFutureDay: true)) //
-            DayView(day: CalendarDay(dayNumber: 24, dayOfWeek: "Thu", isSelected: true, isFutureDay: true)) // Example of a selected future day (though our logic prevents this state)
+            DayView(day: CalendarModel(dayNumber: 21, dayOfWeek: "Mon", isSelected: false))
+            DayView(day: CalendarModel(dayNumber: 22, dayOfWeek: "Tue", isSelected: true))
+            DayView(day: CalendarModel(dayNumber: 23, dayOfWeek: "Wed", isSelected: false, isFutureDay: true)) //
+            DayView(day: CalendarModel(dayNumber: 24, dayOfWeek: "Thu", isSelected: true, isFutureDay: true)) // Example of a selected future day (though our logic prevents this state)
         }
 }

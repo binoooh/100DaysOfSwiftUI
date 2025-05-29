@@ -13,10 +13,10 @@ struct ContentView: View {
     
     // Adjust this value to control the overlap
     let overlapAmount: CGFloat = 150
-    let cardData: [CardInfo] = [
-        CardInfo(title: "Sleep for 8 hours", tag: "sleep", detail: "Everyday", backgroundColor: Color(hex: 0xd8fe74), customGraphic: AnyView(SleepGraphic())),
-        CardInfo(title: "Go for a walk", tag: "walk", detail: "25 min", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(WalkGraphic())),
-        CardInfo(title: "Meditation", tag: "meditate", detail: "15 min", backgroundColor: Color(hex: 0x94abfe), customGraphic: AnyView(MeditationGraphic()))
+    let cardData: [CardModel] = [
+        CardModel(title: "Sleep for 8 hours", tag: "sleep", detail: "Everyday", backgroundColor: Color(hex: 0xd8fe74), customGraphic: AnyView(SleepGraphic())),
+        CardModel(title: "Go for a walk", tag: "walk", detail: "25 min", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(WalkGraphic())),
+        CardModel(title: "Meditation", tag: "meditate", detail: "15 min", backgroundColor: Color(hex: 0x94abfe), customGraphic: AnyView(MeditateGraphic()))
     ]
     
     var body: some View {
