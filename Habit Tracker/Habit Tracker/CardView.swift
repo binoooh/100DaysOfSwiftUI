@@ -132,5 +132,5 @@ struct CardView: View {
 }
 
 #Preview {
-    CardView(info: CardModel(title: "Sleep for 8 hours", tag: "sleep", detail: "Everyday", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(SleepGraphic())))
+    CardView(info: CardModel(title: "Pray", tag: "pray", time: 10, detail: "10 min", backgroundColor: Color(hex: 0xf097e0), customGraphic: AnyView(PrayGraphic())))
 }

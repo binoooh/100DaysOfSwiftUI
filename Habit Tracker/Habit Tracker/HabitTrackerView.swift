@@ -25,7 +25,11 @@ struct HabitTrackerView: View {
         
         TipsModel(tag: "meditate", image: "ear", description: "Find a quiet place before you start"),
         TipsModel(tag: "meditate", image: "earpods", description: "Listen to ambient music to relax"),
-        TipsModel(tag: "meditate", image: "chair.lounge", description: "Find a confy chair to sit and relax")
+        TipsModel(tag: "meditate", image: "chair.lounge", description: "Find a comfy chair to sit and relax"),
+        
+        TipsModel(tag: "pray", image: "house", description: "Find a quiet place before you start"),
+        TipsModel(tag: "pray", image: "book.closed", description: "Read a Bible passage before praying"),
+        TipsModel(tag: "pray", image: "lightbulb", description: "Dim the lights to set the mood")
     ]
     
     @State private var selectedTag: String = ""
@@ -51,7 +55,7 @@ struct HabitTrackerView: View {
                 // TODO: Add Timer
                 Text("7 hrs 32 mins")
                     .font(.system(size: 32, weight: .bold))
-                    .padding()
+                    .padding(.bottom)
                 
                 HStack {
                     Text("Try some tips")
@@ -78,7 +82,7 @@ struct HabitTrackerView: View {
                 }
                 // Finish button
                 Button {
-                    //
+                    dismiss()
                 } label: {
                     ZStack {
                         RoundedRectangle(cornerRadius: 20)
@@ -121,8 +125,10 @@ struct HabitTrackerView: View {
             imageTag = .sleep
         } else if tag == "walk" {
             imageTag = .walk
-        } else {
+        } else if tag == "meditate" {
             imageTag = .meditate
+        } else {
+            imageTag = .pray
         }
         
         return imageTag
@@ -130,5 +136,5 @@ struct HabitTrackerView: View {
 }
 
 #Preview {
-    HabitTrackerView(tag: "sleep", title: "Sleep for 8 hours")
+    HabitTrackerView(tag: "pray", title: "Pray for 10 mins")
 }
