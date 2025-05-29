@@ -33,6 +33,7 @@ struct HabitTrackerView: View {
     ]
     
     @State private var selectedTag: String = ""
+    @State private var hasStarted: Bool = false
     
     var filteredTips: [TipsModel] {
         if selectedTag.isEmpty {
@@ -53,9 +54,16 @@ struct HabitTrackerView: View {
                     .shadow(radius: 10)
                 
                 // TODO: Add Timer
-                Text("7 hrs 32 mins")
-                    .font(.system(size: 32, weight: .bold))
-                    .padding(.bottom)
+                Button {
+                    //
+                    hasStarted.toggle()
+                } label: {
+                    Text(!hasStarted ? "Start" : "7 hrs 32 mins")
+                        .font(.system(size: 32, weight: .bold))
+                        .fontDesign(.rounded)
+                        .foregroundStyle(.black)
+                        .padding(.bottom)
+                }
                 
                 HStack {
                     Text("Try some tips")
@@ -76,6 +84,9 @@ struct HabitTrackerView: View {
                                 .lineLimit(1, reservesSpace: true)
                                 .font(.system(size: 16, weight: .light))
                                 .foregroundStyle(.black)
+                                .minimumScaleFactor(0.8)
+                                .lineLimit(1)
+                                .fixedSize(horizontal: true, vertical: true)
                         }
                     }
                     

@@ -21,12 +21,11 @@ struct CalendarView: View {
     }
 
     init() {
-        let initialDate = Date()
-        // Pass `today` to `generateDaysInMonth` for accurate future day calculation
-        let initialDays = generateDaysInMonth(for: initialDate, today: calendar.startOfDay(for: Date()), calendar: calendar, dateFormatter: dateFormatter)
+        let initialDisplayDate = Date()
+        let initialDays = generateDaysInMonth(for: initialDisplayDate, actualTodayDate: self.today, calendar: calendar, dateFormatter: dateFormatter)
         _days = State(initialValue: initialDays)
         _selectedDayID = State(initialValue: initialDays.first(where: { $0.isSelected })?.id)
-        _displayedDate = State(initialValue: initialDate)
+        _displayedDate = State(initialValue: calendar.startOfDay(for: initialDisplayDate))
     }
 
     var body: some View {
@@ -70,67 +69,84 @@ struct CalendarView: View {
     }
     
     private func checkFutureDay(for newID: UUID?, proxy: ScrollViewProxy) {
-        if let newID = newID {
-            // Check if the day associated with newID is not a future day before scrolling
-            if let dayToScroll = days.first(where: { $0.id == newID }), !dayToScroll.isFutureDay {
+        if let currentID = newID {
+            if let dayToScroll = days.first(where: { $0.id == currentID }), !dayToScroll.isFutureDay {
                 withAnimation {
-                    proxy.scrollTo(newID, anchor: .center)
+                    proxy.scrollTo(currentID, anchor: .center)
                 }
             }
         }
     }
     
     private func getCurrentDay(for proxy: ScrollViewProxy) {
-        let currentDateOnAppear = Date()
-        let startOfCurrentDateOnAppear = calendar.startOfDay(for: currentDateOnAppear)
-        var needsScroll = false
-
-        if !calendar.isDate(startOfCurrentDateOnAppear, equalTo: calendar.startOfDay(for: displayedDate), toGranularity: .month) ||
-           !calendar.isDate(startOfCurrentDateOnAppear, equalTo: calendar.startOfDay(for: displayedDate), toGranularity: .year) {
+        let currentActualDate = self.today // Current start of day
+        
+        // Check if the displayed month/year is different from the current actual month/year
+        if !calendar.isDate(displayedDate, equalTo: currentActualDate, toGranularity: .month) ||
+            !calendar.isDate(displayedDate, equalTo: currentActualDate, toGranularity: .year) {
             
-            let newDays = generateDaysInMonth(for: startOfCurrentDateOnAppear, today: startOfCurrentDateOnAppear, calendar: calendar, dateFormatter: dateFormatter)
+            // Month or year has changed, regenerate days for the new current month
+            let newDays = generateDaysInMonth(
+                for: currentActualDate, // Generate for the current month
+                actualTodayDate: currentActualDate, // Use current date for "today" status
+                calendar: calendar,
+                dateFormatter: dateFormatter
+            )
             self.days = newDays
-            self.displayedDate = startOfCurrentDateOnAppear
+            self.displayedDate = currentActualDate // Update displayedDate to the new month
             self.selectedDayID = newDays.first(where: { $0.isSelected })?.id
-            needsScroll = true
             
         } else {
-            // If the month is the same, check if 'today' has changed (e.g. app open overnight)
-            // or if selection needs to be (re)applied.
-            var daysNeedUpdate = false
-            for index in days.indices {
-                let dayDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: displayedDate),
-                                                                month: calendar.component(.month, from: displayedDate),
-                                                                day: days[index].dayNumber))!
-                let isPastOrToday = calendar.startOfDay(for: dayDate) <= startOfCurrentDateOnAppear
+            // Month and year are the same. Update isFutureDay and isSelected for existing days.
+            var newPotentialSelectedID: UUID? = nil
+            var modelsActuallyChanged = false
+            
+            for i in days.indices {
+                let originalDayIsSelected = days[i].isSelected
+                let originalDayIsFuture = days[i].isFutureDay
                 
-                if days[index].isFutureDay == isPastOrToday { // if a future day is no longer future, or vice-versa
-                    daysNeedUpdate = true
-                    break
+                // Construct the date for the current item in the loop
+                // Use displayedDate for year/month context as we are in the "same month" block
+                guard let dayDate = calendar.date(from: DateComponents(
+                    year: calendar.component(.year, from: displayedDate),
+                    month: calendar.component(.month, from: displayedDate),
+                    day: days[i].dayNumber))
+                else { continue }
+                
+                let startOfDayItem = calendar.startOfDay(for: dayDate)
+                let newIsFutureDay = startOfDayItem > currentActualDate
+                let newIsSelectedDay = calendar.isDate(startOfDayItem, inSameDayAs: currentActualDate) && !newIsFutureDay
+                
+                if originalDayIsFuture != newIsFutureDay || originalDayIsSelected != newIsSelectedDay {
+                    days[i].isFutureDay = newIsFutureDay
+                    days[i].isSelected = newIsSelectedDay
+                    modelsActuallyChanged = true
                 }
-                // check if 'isSelected' needs to be updated if today changed
-                let shouldBeSelected = isTodayPredicate(dayComponent: days[index].dayNumber, dateBeingGenerated: dayDate, targetDate: startOfCurrentDateOnAppear, calendar: calendar)
-                if days[index].isSelected != shouldBeSelected && !days[index].isFutureDay {
-                    daysNeedUpdate = true
-                    break
+                
+                if newIsSelectedDay {
+                    newPotentialSelectedID = days[i].id
                 }
-            }
-
-            if daysNeedUpdate {
-                 let updatedDays = generateDaysInMonth(for: displayedDate, today: startOfCurrentDateOnAppear, calendar: calendar, dateFormatter: dateFormatter)
-                 self.days = updatedDays
-                 self.selectedDayID = updatedDays.first(where: { $0.isSelected })?.id
             }
             
-            // Ensure selection if currently nil and today is selectable
-            if selectedDayID == nil, let todayId = days.first(where: { $0.isSelected && !$0.isFutureDay })?.id {
-                selectedDayID = todayId
+            // Update selectedDayID if it has changed based on the refreshed isSelected states
+            if self.selectedDayID != newPotentialSelectedID {
+                self.selectedDayID = newPotentialSelectedID
+            } else if modelsActuallyChanged && newPotentialSelectedID == nil && self.selectedDayID != nil {
+                // If models changed, nothing is newly selected, but something *was* selected, nullify it.
+                // This handles the case where 'today' moves and the previously selected day is no longer 'today'.
+                self.selectedDayID = nil
+            } else if modelsActuallyChanged && newPotentialSelectedID != nil && self.selectedDayID == nil {
+                // If models changed, something is newly selected, and nothing *was* selected, set it.
+                self.selectedDayID = newPotentialSelectedID
             }
-            needsScroll = true // Always attempt to scroll to selected day on appear
         }
         
-        if needsScroll, let idToScroll = selectedDayID {
-            DispatchQueue.main.async {
+        // Scroll to the selected day if it exists and is not a future day
+        // This will use the potentially updated selectedDayID
+        if let idToScroll = selectedDayID,
+           let dayToScroll = days.first(where: { $0.id == idToScroll }),
+           !dayToScroll.isFutureDay {
+            DispatchQueue.main.async { // Ensure UI updates on main thread
                 withAnimation {
                     proxy.scrollTo(idToScroll, anchor: .center)
                 }
@@ -138,45 +154,40 @@ struct CalendarView: View {
         }
     }
 
-    private func generateDaysInMonth(for date: Date, today: Date, calendar: Calendar, dateFormatter: DateFormatter) -> [CalendarModel] {
-        guard let monthInterval = calendar.dateInterval(of: .month, for: date),
-              let numberOfDaysInMonth = calendar.range(of: .day, in: .month, for: date)?.count
+    private func generateDaysInMonth(for generatingMonthDate: Date, actualTodayDate: Date, calendar: Calendar, dateFormatter: DateFormatter) -> [CalendarModel] {
+        guard let monthInterval = calendar.dateInterval(of: .month, for: generatingMonthDate),
+              let numberOfDaysInMonth = calendar.range(of: .day, in: .month, for: generatingMonthDate)?.count
         else {
             return []
         }
-
+        
         var calendarDays: [CalendarModel] = []
-        dateFormatter.dateFormat = "EEE"
-
-        let startOfToday = calendar.startOfDay(for: today) // Use the passed 'today'
-
+        dateFormatter.dateFormat = "EEE" // Set date format for day of week
+        
+        let startOfActualToday = calendar.startOfDay(for: actualTodayDate) // Use the passed actual today date
+        
         for dayOffset in 0..<numberOfDaysInMonth {
             guard let dayDateInMonth = calendar.date(byAdding: .day, value: dayOffset, to: monthInterval.start) else {
                 continue
             }
             
-            let startOfDayInMonth = calendar.startOfDay(for: dayDateInMonth) // Compare start of days
-
+            let startOfDayInMonth = calendar.startOfDay(for: dayDateInMonth)
+            
             let dayNumber = calendar.component(.day, from: startOfDayInMonth)
             let dayOfWeek = dateFormatter.string(from: startOfDayInMonth)
             
-            let isFuture = startOfDayInMonth > startOfToday
-            // A day is selected if it's today AND it's not in the future (this check is a bit redundant if isFuture is false, but good for clarity)
-            let isSelectedDay = calendar.isDate(startOfDayInMonth, inSameDayAs: startOfToday) && !isFuture
+            let isFuture = startOfDayInMonth > startOfActualToday
+            // A day is selected if it matches the actualTodayDate AND it's not in the future
+            let isSelectedDay = calendar.isDate(startOfDayInMonth, inSameDayAs: startOfActualToday) && !isFuture
             
             calendarDays.append(CalendarModel(dayNumber: dayNumber, dayOfWeek: dayOfWeek, isSelected: isSelectedDay, isFutureDay: isFuture))
         }
         return calendarDays
     }
     
-    private func isTodayPredicate(dayComponent: Int, dateBeingGenerated: Date, targetDate: Date, calendar: Calendar) -> Bool {
-        // targetDate should already be startOfDay for consistent comparison
-        let startOfDateBeingGenerated = calendar.startOfDay(for: dateBeingGenerated)
-        return calendar.isDate(startOfDateBeingGenerated, inSameDayAs: targetDate)
-    }
-
+    // This function can be used to display the current month and year, e.g., above the calendar
     private func monthYearString(from date: Date, dateFormatter: DateFormatter) -> String {
-        dateFormatter.dateFormat = "MMMM YYYY"
+        dateFormatter.dateFormat = "MMMM yyyy" // Format for month and year
         return dateFormatter.string(from: date)
     }
 }
