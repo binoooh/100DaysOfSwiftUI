@@ -13,6 +13,7 @@ struct HabitTrackerView: View {
     
     let tag: String
     let title: String
+    let time: Int
     
     let allTips: [TipsModel] = [
         TipsModel(tag: "sleep", image: "drop", description: "Drink some water before going to bed"),
@@ -33,7 +34,15 @@ struct HabitTrackerView: View {
     ]
     
     @State private var selectedTag: String = ""
-    @State private var hasStarted: Bool = false
+   
+    // The text displayed on the button.
+    @State private var buttonText: String = "Start"
+    // The total time remaining in seconds.
+    @State private var timeRemaining: Int = 0
+    // The current timer instance.
+    @State private var timer: Timer?
+    // Tracks whether the timer is currently active.
+    @State private var isTimerRunning: Bool = false
     
     var filteredTips: [TipsModel] {
         if selectedTag.isEmpty {
@@ -56,14 +65,16 @@ struct HabitTrackerView: View {
                 // TODO: Add Timer
                 Button {
                     //
-                    hasStarted.toggle()
+                    toggleTimer()
                 } label: {
-                    Text(!hasStarted ? "Start" : "7 hrs 32 mins")
+                    Text(buttonText)
                         .font(.system(size: 32, weight: .bold))
                         .fontDesign(.rounded)
                         .foregroundStyle(.black)
                         .padding(.bottom)
+                        
                 }
+                .disabled(isTimerRunning)
                 
                 HStack {
                     Text("Try some tips")
@@ -104,6 +115,7 @@ struct HabitTrackerView: View {
                             .foregroundStyle(.white)
                     }
                 }
+                .disabled(isTimerRunning)
                 .padding(.top)
             }
             .navigationTitle(title)
@@ -144,8 +156,59 @@ struct HabitTrackerView: View {
         
         return imageTag
     }
+    // MARK: - Timer Logic
+
+        private func toggleTimer() {
+            if isTimerRunning {
+                // If timer is running, tapping again might be intended to stop/reset.
+                // For this request, we'll let it run its course or reset it immediately.
+                // Let's choose to reset it.
+                stopTimer()
+                buttonText = "Start"
+                // Reset timeRemaining to the full duration when stopping
+                timeRemaining = time * 60
+            } else {
+                // If timer is not running, start it.
+                startTimer()
+            }
+        }
+
+        private func startTimer() {
+            isTimerRunning = true
+            timeRemaining = time * 60
+            updateButtonText() // Show initial time
+
+            // Invalidate any existing timer before starting a new one.
+            timer?.invalidate()
+
+            // Create a new timer that fires every second.
+            timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { _ in
+                if timeRemaining > 0 {
+                    timeRemaining -= 1
+                    updateButtonText()
+                } else {
+                    // Timer has finished.
+                    stopTimer()
+                    buttonText = "Start"
+                }
+            }
+        }
+
+        private func stopTimer() {
+            // Invalidate and release the timer.
+            timer?.invalidate()
+            timer = nil
+            isTimerRunning = false
+        }
+
+        private func updateButtonText() {
+            // Format the remaining time as "MM:SS".
+            let minutes = timeRemaining / 60
+            let seconds = timeRemaining % 60
+            buttonText = String(format: "%02d:%02d", minutes, seconds)
+        }
 }
 
 #Preview {
-    HabitTrackerView(tag: "pray", title: "Pray for 10 mins")
+    HabitTrackerView(tag: "pray", title: "Pray for 10 mins", time: 1)
 }

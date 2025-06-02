@@ -88,7 +88,7 @@ struct CardView: View {
                 }
         )
         .fullScreenCover(isPresented: $isCardPicked) {
-            HabitTrackerView(tag: info.tag, title: info.title)
+            HabitTrackerView(tag: info.tag, title: info.title, time: info.time)
         }
     }
     
