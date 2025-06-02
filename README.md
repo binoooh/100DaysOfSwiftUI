@@ -16,11 +16,12 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 9 - [Edutainment](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Edutainment)
 - [x] Project 10 - [iExpense](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/iExpense)
 - [x] Project 11 - [Moonshot](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Moonshot)
-- [x] Project 12 - [Habit Tracker](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/HabitTracker)
+- [x] Project 12 - [Habit Tracker](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Habit%20Tracker)
 - [x] Project 13 - [Cupcake Corner](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/CupcakeCorner)
+- [ ] Project 14 - BookWorm - In-progress 
 
 ## Tech Stack
 | Category    | Technologies                     |
 |-------------|----------------------------------|
 | Languages   | Swift, SwiftUI                   |
-| Tools       | Xcode, Fork, AlexSideBar         |
+| Tools       | Xcode, Fork, Gemini              |
