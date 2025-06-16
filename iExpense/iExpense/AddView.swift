@@ -6,8 +6,10 @@
 //
 
 import SwiftUI
+import SwiftData // Day 59 Coding Challenge
 
 struct AddView: View {
+    @Environment(\.modelContext) var modelContext // Day 59 Coding Challenge
     @Environment(\.dismiss) var dismiss
     @State private var name = "Add New Item"
     @State private var type = "Personal"
@@ -15,7 +17,7 @@ struct AddView: View {
     @State private var currency = "USD"
     // Day 38 Coding Challenge
     let currencies = ["USD", "CAD", "JPY", "EUR", "AUD"]
-    var expenses: Expenses
+    @Query var expenses: [ExpenseItem]
 
     var body: some View {
         NavigationStack {
@@ -59,9 +61,14 @@ struct AddView: View {
                 // Day 46 Coding Challenge
                 ToolbarItem(placement: .topBarTrailing) {
                     Button("Save") {
+                        
                         // Day 38 Coding Challenge
+                        //let item = ExpenseItem(name: name, type: type, amount: amount, currency: currency)
+                        //expenses.items.append(item)
+                        
+                        // Day 59 Coding Challenge
                         let item = ExpenseItem(name: name, type: type, amount: amount, currency: currency)
-                        expenses.items.append(item)
+                        modelContext.insert(item)
                         dismiss()
                     }
                 }
@@ -73,5 +80,5 @@ struct AddView: View {
 }
 
 #Preview {
-    AddView(expenses: Expenses())
+    AddView() // Day 59 Coding Challenge
 }
