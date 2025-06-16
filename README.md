@@ -13,12 +13,15 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 6 - [Animations](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Animations)
 - [x] Project 7 - [iExpense](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/iExpense)
 - [x] Project 8 - [Moonshot](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Moonshot)
+- [ ] Project 8a - [Planets](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Planets)
 - [x] Project 9 - Navigation
 - [x] Project 10 - [Cupcake Corner](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/CupcakeCorner)
 - [x] Project 11 - [Bookworm](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Bookworm) 
 - [x] Project 12 - [SwiftDataProject](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/SwiftDataProject)
-- [x] Project 13 - 
-- [x] Project 14 - 
+- [ ] Project 12a - [UsersandFriends] - In-progess
+- [ ] Project 13 - 
+- [ ] Project 14 -
+      
 
 ## Tech Stack
 | Category    | Technologies                     |
