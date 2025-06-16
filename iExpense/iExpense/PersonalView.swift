@@ -6,26 +6,29 @@
 //  Day 38 Code Challenge
 
 import SwiftUI
+import SwiftData
 
 struct PersonalView: View {
     
-    var expenses: Expenses
+    @Environment(\.modelContext) var modelContext
+    
+    @Query var expenses: [ExpenseItem]
+    //var expenses: Expenses
     var expenseType = "Personal"
     
     var body: some View {
-       
         List {
             Section(header: Text("Personal").font(.headline)) {
-                ForEach(expenses.items) { item in
-                    if item.type == expenseType {
+                ForEach(expenses) { expense in
+                    if expense.type == expenseType {
                         HStack {
                             VStack(alignment: .leading) {
-                                Text(item.name)
+                                Text(expense.name)
                                     .font(.headline)
-                                Text(item.type)
+                                Text(expense.type)
                             }
                             Spacer()
-                            Text(item.amount, format: .currency(code: "\(item.currency)"))
+                            Text(expense.amount, format: .currency(code: "\(expense.currency)"))
                         }
                     }
                 }
@@ -35,11 +38,24 @@ struct PersonalView: View {
         .listStyle(InsetGroupedListStyle()) // Optional: for a distinct look
     }
     
+    init(expenseType: String, sortOder: [SortDescriptor<ExpenseItem>]) {
+        _expenses = Query(filter: #Predicate<ExpenseItem> { expense in
+            expense.type == expenseType
+        }, sort: sortOder)
+    }
+    
     func removePersonal(at offsets: IndexSet) {
-        expenses.items.remove(atOffsets: offsets)
+        //expenses.items.remove(atOffsets: offsets)
+        // Day 59 Coding Challenge
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(expenses[index])
+            }
+        }
     }
 }
 
 #Preview {
-    PersonalView(expenses: Expenses())
+    PersonalView(expenseType: "Personal", sortOder: [SortDescriptor(\ExpenseItem.type)])
+        .modelContainer(for: ExpenseItem.self)
 }
