@@ -24,7 +24,8 @@ struct UsersView: View {
                     .font(.subheadline)
                     .foregroundStyle(.secondary)
                 NavigationLink("View More") {
-                    UserDetailsView(user: $users)
+                    // Pass the selected user to the details view
+                    UserDetailsView(user: user, allUsers: users)
                 }
                 .foregroundStyle(.blue)
                 //.disabled(user.isActive ? false : true)
