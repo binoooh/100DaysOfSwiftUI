@@ -19,7 +19,7 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 11 - [Bookworm](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Bookworm) 
 - [x] Project 12 - [SwiftDataProject](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/SwiftDataProject)
 - [x] Project 12a - [FriendFace](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFace)
-- [ ] Project 12b - [FriendFace Swift Data](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFaceSD)
+- [x] Project 12b - [FriendFace Swift Data](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFaceSD)
 - [ ] Project 13 - 
 - [ ] Project 14 -
       
