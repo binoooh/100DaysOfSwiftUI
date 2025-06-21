@@ -2,7 +2,7 @@
 
 ### My solutions and project challenges from Paul Hudson's [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui)
 
-The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 62 and will continue updating this repo as I go along finishing the course.
+The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 67 and will continue updating this repo as I go along finishing the course.
 
 #### :spiral_notepad: Coding Projects
 - [x] Project 1 - [WeSplit](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/WeSplit)
@@ -20,8 +20,8 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 12 - [SwiftDataProject](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/SwiftDataProject)
 - [x] Project 12a - [FriendFace](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFace)
 - [x] Project 12b - [FriendFace Swift Data](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFaceSD)
-- [ ] Project 13 - Instafilter - In-Progress 
-- [ ] Project 14 -
+- [x] Project 13 - [Instafilter](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Instafilter)
+- [ ] Project 14 - In-progress
       
 #### :spiral_notepad: Other Coding Challenges
 - [x] [Unit Coverter](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/UnitConverter)
