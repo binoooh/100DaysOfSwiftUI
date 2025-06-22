@@ -21,7 +21,13 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 12a - [FriendFace](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFace)
 - [x] Project 12b - [FriendFace Swift Data](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/FriendFaceSD)
 - [x] Project 13 - [Instafilter](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Instafilter)
-- [ ] Project 14 - In-progress
+- [ ] Project 14 - Bucketlist -- In-Progress
+- [ ] Project 15 - Accessibility Sandbox
+- [ ] Project 16 - HotProspects
+- [ ] Project 17 - FlashZilla
+- [ ] Project 18 - Layout Geometry
+- [ ] Project 19 - SnowSeeker
+- [ ] Project 20 - Drawing
       
 #### :spiral_notepad: Other Coding Challenges
 - [x] [Unit Coverter](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/UnitConverter)
