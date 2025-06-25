@@ -17,8 +17,11 @@ extension ContentView {
         private(set) var locations = [Location]()
         var selectedPlace: Location?
         var isUnlocked = false
-        
         let savePath = URL.documentsDirectory.appending(path: "SavedPlaces")
+        // Day 73 Coding Challenge
+        var faceIDError = false
+        var bioMetricsError = false
+        
         
         init() {
             do {
@@ -64,11 +67,13 @@ extension ContentView {
                     if success {
                         self.isUnlocked = true
                     } else {
-                        // error
+                        // Day 73 Coding Challenge
+                        self.faceIDError = true
                     }
                 }
             } else {
-                // no biometrics
+                // Day 73 Coding Challenge
+                self.bioMetricsError = true
             }
         }
     }
