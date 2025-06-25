@@ -5,35 +5,31 @@
 //  Created by Vinz on 6/22/25.
 //
 
+// Day 73 Coding Challenge: Created editViewModel
+
 import SwiftUI
 
 struct EditView: View {
     
-    enum LoadingState {
-        case loading, loaded, failed
-    }
-    
     @Environment(\.dismiss) var dismiss
-    
-    @State private var name: String
-    @State private var description: String
-    @State private var loadingState = LoadingState.loading
-    @State private var pages = [Page]()
-    
-    var location: Location
     var onSave: (Location) -> Void
+    // Day 73 Coding Challenge
+    @State private var editViewModel = EditViewModel(name: "Example", description: "Example", location: .example)
     
     var body: some View {
         NavigationStack {
             Form {
                 Section {
-                    TextField("Place name", text: $name)
-                    TextField("Description", text: $description)
+                    // Day 73 Coding Challenge
+                    TextField("Place name", text: $editViewModel.name)
+                    TextField("Description", text: $editViewModel.description)
                 }
                 Section("Nearby...") {
-                    switch loadingState {
+                    // Day 73 Coding Challenge
+                    switch editViewModel.loadingState {
                     case .loaded:
-                        ForEach(pages, id:\.pageid) { page in
+                        // Day 73 Coding Challenge
+                        ForEach(editViewModel.pages, id:\.pageid) { page in
                             /*@START_MENU_TOKEN@*/Text(page.title)/*@END_MENU_TOKEN@*/
                                 .font(.headline)
                             + Text(": ") +
@@ -51,45 +47,26 @@ struct EditView: View {
             .navigationTitle("Place Details")
             .toolbar {
                 Button("Save") {
-                    var newLocation = location
+                    var newLocation = editViewModel.location            // Day 73 Coding Challenge
                     newLocation.id = UUID()
-                    newLocation.name = name
-                    newLocation.description = description
+                    newLocation.name = editViewModel.name               // Day 73 Coding Challenge
+                    newLocation.description = editViewModel.description // Day 73 Coding Challenge
                     
                     onSave(newLocation)
                     dismiss()
                 }
             }
             .task {
-                await fetchNearbyPlaces()
+                // Day 73 Coding Challenge
+                await editViewModel.fetchNearbyPlaces()
             }
         }
         
     }
     init(location: Location, onSave: @escaping (Location) -> Void) {
-        self.location = location
+        // Day 73 Coding Challenge
         self.onSave = onSave
-        _name = State(initialValue: location.name)
-        _description = State(initialValue: location.description)
-    }
-    
-    func fetchNearbyPlaces() async {
-        let urlString = "https://en.wikipedia.org/w/api.php?ggscoord=\(location.latitude)%7C\(location.longitude)&action=query&prop=coordinates%7Cpageimages%7Cpageterms&colimit=50&piprop=thumbnail&pithumbsize=500&pilimit=50&wbptterms=description&generator=geosearch&ggsradius=10000&ggslimit=50&format=json"
-        
-        guard let url = URL(string: urlString) else {
-            print("Bad URL: \(urlString)")
-            return
-        }
-        
-        do {
-            let (data, _) = try await URLSession.shared.data(from: url)
-            
-            let items = try JSONDecoder().decode(Result.self, from: data)
-            pages = items.query.pages.values.sorted()
-            loadingState = .loaded
-        } catch {
-            loadingState = .failed
-        }
+        _editViewModel = State(initialValue: EditViewModel(name: location.name, description: location.description, location: location))
     }
 }
 
