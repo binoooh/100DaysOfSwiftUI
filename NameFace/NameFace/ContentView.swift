@@ -80,7 +80,7 @@ struct ContentView: View {
                         
                         do {
                             try data.write(to: filePath)
-                            let newPhoto = NamedPhoto(photoPath: filePath, latitude: location.coordinate.latitude, longitude: location.coordinate.longitude)
+                            let newPhoto = NamedPhoto(photoPath: filePath, latitude: location.latitude, longitude: location.longitude)
                             namedPhotos.append(newPhoto)
                             // Store the ID of the photo
                             photoIDToName = newPhoto.id
