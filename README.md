@@ -2,7 +2,7 @@
 
 ### My solutions and project challenges from Paul Hudson's [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui)
 
-The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 77 and will continue updating this repo as I go along finishing the course.
+The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 78 and will continue updating this repo as I go along finishing the course.
 
 #### :spiral_notepad: Coding Projects
 - [x] Project 1 - [WeSplit](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/WeSplit)
@@ -34,7 +34,8 @@ The projects and challenges from this great course helps me through my journey i
 - [x] [Rock, Paper Scissors](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/RockPaperScissors)
 - [x] [Guess The Flag](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/GuessTheFlag)
 - [x] [Edutainment](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Edutainment)
-- [x] [Habit Tracker](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Habit%20Tracker) 
+- [x] [Habit Tracker](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Habit%20Tracker)
+- [x] [Name Face](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/NameFace)
 
 ## Tech Stack
 | Category    | Technologies                     |
