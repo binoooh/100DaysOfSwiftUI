@@ -10,7 +10,8 @@ import CoreLocation
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private let locationManager = CLLocationManager()
-    @Published var lastKnownLocation: CLLocation?
+    //@Published var lastKnownLocation: CLLocation?
+    @Published var lastKnownLocation: CLLocationCoordinate2D?
     
     override init() {
         super.init()
@@ -22,7 +23,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     // Gets the last known location
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        lastKnownLocation = locations.last
+        lastKnownLocation = locations.first?.coordinate
     }
     
     // Fail safe error
