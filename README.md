@@ -36,6 +36,7 @@ The projects and challenges from this great course helps me through my journey i
 - [x] [Edutainment](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Edutainment)
 - [x] [Habit Tracker](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Habit%20Tracker)
 - [x] [Name Face](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/NameFace)
+- [x] [Dice Roller](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/DiceRoller)
 
 ## Tech Stack
 | Category    | Technologies                     |
