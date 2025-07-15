@@ -2,7 +2,7 @@
 
 ### My solutions and project challenges from Paul Hudson's [100 Days of SwiftUI](https://www.hackingwithswift.com/100/swiftui)
 
-The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 95 and will continue updating this repo as I go along finishing the course.
+The projects and challenges from this great course helps me through my journey in learning SwiftUI app development, it also helps me to push myself to solve challenges and understand better the language. I'm currently on Day 99 and will continue updating this repo as I go along finishing the course.
 
 #### :spiral_notepad: Coding Projects
 - [x] Project 1 - [WeSplit](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/WeSplit)
@@ -26,7 +26,7 @@ The projects and challenges from this great course helps me through my journey i
 - [x] Project 16 - [HotProspects](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/HotProspects)
 - [x] Project 17 - [FlashZilla](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/Flashzilla)
 - [x] Project 18 - [Layout Geometry](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/LayoutAndGeometry)
-- [ ] Project 19 - SnowSeeker
+- [x] Project 19 - [SnowSeeker](https://github.com/binoooh/100DaysOfSwiftUI/blob/main/SnowSeeker)
 - [ ] Project 20 - Drawing
       
 #### :spiral_notepad: Other Coding Challenges
